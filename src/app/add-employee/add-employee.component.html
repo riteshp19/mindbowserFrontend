@@ -1,0 +1,86 @@
+<mat-dialog-content class="mat-typography">
+    <div class="card py-2 px-2">
+        <div class="card-body">
+            <form [formGroup]="employee">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Emp Id</mat-label>
+                            <input type="text" formControlName="empId" matInput placeholder="Employee Id" />
+                            <mat-error
+                              *ngIf="employee.controls['empId'].touched && employee.controls['empId'].errors?.required">
+                              This field is mandatory.
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" formControlName="firstName" matInput placeholder="First Name" />
+                            <mat-error
+                              *ngIf="employee.controls['firstName'].touched && employee.controls['firstName'].errors?.required">
+                              This field is mandatory.
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" formControlName="lastName" matInput placeholder="Last Name" />
+                            <mat-error
+                              *ngIf="employee.controls['lastName'].touched && employee.controls['lastName'].errors?.required">
+                              This field is mandatory.
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <input type="text" formControlName="address" matInput placeholder="Address" />
+                            <mat-error
+                              *ngIf="employee.controls['address'].touched && employee.controls['address'].errors?.required">
+                              This field is mandatory.
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Date Of Birth</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dob">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="employee.controls['dob'].touched && employee.controls['dob'].errors?.required">
+                            This field is mandatory.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Mobile</mat-label>
+                            <input type="text" formControlName="mobile" matInput placeholder="Mobile" />
+                            <mat-error
+                              *ngIf="employee.controls['mobile'].touched && employee.controls['mobile'].errors?.required">
+                              This field is mandatory.
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input type="text" formControlName="city" matInput placeholder="City" />
+                            <mat-error
+                              *ngIf="employee.controls['city'].touched && employee.controls['city'].errors?.required">
+                              This field is mandatory.
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button *ngIf="submitbutton"(click)="saveEmployee()">Save</button>
+    <button mat-button *ngIf="updatebutton" (click)="updateEmployee()">Update</button>
+  </mat-dialog-actions>

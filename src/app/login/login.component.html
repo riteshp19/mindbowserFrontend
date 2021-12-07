@@ -1,0 +1,48 @@
+<section class="h-100 gradient-custom">
+    <div class="container py-5">
+        <div class="row py-3 justify-content-center align-items-center">
+            <div class="col-md-8 mt-5">
+                <div class="card shadow-2-strong card-registration">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Manager SignIn</h3>
+                        <form [formGroup]="loginForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Email </mat-label>
+                                        <input type="email" formControlName="email" matInput placeholder="Email Id" />
+                                        <mat-error
+                                          *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.required">
+                                          This field is mandatory.
+                                        </mat-error>
+                                        <mat-error
+                                          *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.email">
+                                          Enter Valid Email.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Password </mat-label>
+                                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                      <mat-error
+                                        *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.required">
+                                        This field is mandatory.
+                                      </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 text-center">
+                                <button class="btn btn-outline-primary btn-md" (click)="login()">Login</button>
+                            </div>
+                            <p class="text-center mt-2">Dont Have Account? Please <a href="/register">SignUp</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

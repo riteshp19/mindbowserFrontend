@@ -1,0 +1,104 @@
+<section class="gradient-custom">
+    <div class="container py-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-10">
+                <div class="card shadow-2-strong card-registration">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Manager SignUp</h3>
+                        <form [formGroup]="registerForm">
+
+                            <div class="row col">
+                                <div class="col-md-6 mb-4">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>First Name </mat-label>
+                                        <input type="text" formControlName="firstName" matInput placeholder="First Name" />
+                                        <mat-error
+                                          *ngIf="registerForm.controls['firstName'].touched && registerForm.controls['firstName'].errors?.required">
+                                          This field is mandatory.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Last Name </mat-label>
+                                        <input type="text" formControlName="lastName" matInput placeholder="Last Name" />
+                                        <mat-error
+                                          *ngIf="registerForm.controls['lastName'].touched && registerForm.controls['lastName'].errors?.required">
+                                          This field is mandatory.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Email </mat-label>
+                                        <input type="email" formControlName="email" matInput placeholder="Email Id" />
+                                        <mat-error
+                                          *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.required">
+                                          This field is mandatory.
+                                        </mat-error>
+                                        <mat-error
+                                          *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.email">
+                                          Enter Valid Email.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Date Of Birth</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="dob">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-error *ngIf="registerForm.controls['dob'].touched && registerForm.controls['dob'].errors?.required">
+                                            This field is mandatory.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-12 mb-4 pb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Address</mat-label>
+                                        <input type="text" formControlName="address" matInput placeholder="Address" />
+                                        <mat-error
+                                          *ngIf="registerForm.controls['address'].touched && registerForm.controls['address'].errors?.required">
+                                          This field is mandatory.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Company</mat-label>
+                                        <input type="text" formControlName="company" matInput placeholder="Company" />
+                                        <mat-error
+                                          *ngIf="registerForm.controls['company'].touched && registerForm.controls['company'].errors?.required">
+                                          This field is mandatory.
+                                        </mat-error>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Password </mat-label>
+                                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                      <mat-error
+                                        *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.required">
+                                        This field is mandatory.
+                                      </mat-error>
+                                      <mat-error *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.minlength">
+                                        Password must contain minimum 8 digits.
+                                    </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-2 text-center">
+                                <button class="btn btn-outline-primary btn-md" (click)="signUp()">Register</button>
+                            </div>
+                            <p class="text-center mt-2">Already Have Account? Please <a href="/login">Login</a> here</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

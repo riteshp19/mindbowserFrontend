@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row pt-4 pr-2 pl-2 pt-1 justify-content-center">
+        <div class="col">
+            <button class="btn btn-outline-primary btn-md mt-3 float-right" (click)="logout()">Logout</button>
+        </div>
+        <div class="col-md-12 card py-2 mt-2">
+            <div class="row pt-2">
+                <div class="col-sm-12 pl-4 pt-0 pr-4">
+                    <div class="row card-header">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-9 pl-1 pt-1 colorblack">
+                                    <h5 class="mb-0 headers_form">Employee List</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card-body mt-3 justify-content-center">
+                        <div class="col py-2">
+                            <button class="btn btn-outline-primary btn-md mt-3 float-right" (click)="addEmployee()">Add Employee</button>
+                        </div>
+                        <div class="col-sm-12">
+                            <table class="table table-hover mb-0 ml-2 mr-2">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Date Of Birth</th>
+                                        <th>Address</th>
+                                        <th>Mobile</th>
+                                        <th>City</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let sample of employees | paginate : { id:'paginate', 
+                                                            itemsPerPage: size, currentPage: page, totalItems:totalLength } ">
+                                        <td>{{sample.firstName}}</td>
+                                        <td>{{sample.lastName}}</td>
+                                        <td>{{sample.dob | date : 'dd-MMM-yyy'}}</td>
+                                        <td>{{sample.address}}</td>
+                                        <td>{{sample.mobile}}</td>
+                                        <td>{{sample.city}}</td>
+                                        <td>
+                                            <button class="btn btn-outline-primary btn-sm" (click)="updateDialog(sample._id)">View</button>&nbsp;
+                                            <!-- <button class="btn btn-outline-danger btn-sm" (click)="delete(sample._id)">Delete</button> -->
+                                            <button class="btn btn-outline-danger btn-sm" (click)="openDialog(sample._id)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <pagination-controls id="paginate" directionLinks="true" (pageChange)="onPageChange($event)"
+                class="text-right mt-4"></pagination-controls>
+        </div>
+    </div>
+</div>
