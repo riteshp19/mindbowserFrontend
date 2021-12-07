@@ -37,11 +37,15 @@ export class LoginComponent implements OnInit {
           this.sessionStorage.set('email', res.data.email);
           this.router.navigate(['/employee']);
         }
-      },(error) => {
-        if(error){
-          this.apimicroservice.openSnackbar("Something Went Wrong");
-        }
+      },(ERROR:HttpErrorResponse)=>{
+        console.log(ERROR);
+        this.apimicroservice.openSnackbar(ERROR.error.message);
       }
+      // (error) => {
+      //   if(error){
+      //     this.apimicroservice.openSnackbar("Something Went Wrong");
+      //   }
+      // }
     );
   }
 
