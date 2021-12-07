@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms';
 import { Router } from "@angular/router";
 import { SessionStorageService } from "ngx-store";
@@ -41,11 +41,6 @@ export class LoginComponent implements OnInit {
         console.log(ERROR);
         this.apimicroservice.openSnackbar(ERROR.error.message);
       }
-      // (error) => {
-      //   if(error){
-      //     this.apimicroservice.openSnackbar("Something Went Wrong");
-      //   }
-      // }
     );
   }
 

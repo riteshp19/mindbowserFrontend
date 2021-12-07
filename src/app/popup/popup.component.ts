@@ -25,9 +25,6 @@ export class PopupComponent implements OnInit {
     if(this.value == 'Delete'){
       this.deleteButton = true;
       this.updateButton = false;
-    }else if(this.value == 'Update'){
-      this.deleteButton = false;
-      this.updateButton = true;
     }
   }
 

@@ -1,9 +1,9 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms';
 import { RestApiService } from '../rest-api.service';
 import { HttpErrorResponse } from "@angular/common/http";
-import { MatDialog, MatDialogRef, MatDialogConfig,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EmployeeComponent } from '../employee/employee.component';
+import { MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add-employee',
@@ -11,25 +11,25 @@ import { EmployeeComponent } from '../employee/employee.component';
   styleUrls: ['./add-employee.component.css']
 })
 export class AddEmployeeComponent implements OnInit {
-  @Input() empRef : EmployeeComponent;
   employee : FormGroup;
   updatebutton = false;
   submitbutton = true;
   id: any;
   constructor(private fb: FormBuilder,
     public dialog: MatDialog,
+    public router : Router,
     public dialogRef: MatDialogRef<AddEmployeeComponent>,@Inject(MAT_DIALOG_DATA) public data:any,
     public apimicroservice: RestApiService) { }
 
   ngOnInit() {
     this.employee = this.fb.group({
       'empId': new FormControl('', [Validators.required]),
-      'firstName': new FormControl('', [Validators.required]),
-      'lastName': new FormControl('', [Validators.required]),
+      'firstName': new FormControl('', [Validators.required,Validators.pattern("^[a-zA-Z ]*$")]),
+      'lastName': new FormControl('', [Validators.required,Validators.pattern("^[a-zA-Z ]*$")]),
       'address': new FormControl('', [Validators.required]),
       'dob': new FormControl('', [Validators.required]),
-      'mobile': new FormControl('', [Validators.required]),
-      'city': new FormControl('', [Validators.required])
+      'mobile': new FormControl('', [Validators.required,Validators.pattern("(0|91)?[7-9][0-9]{9}")]),
+      'city': new FormControl('', [Validators.required,Validators.pattern("^[a-zA-Z ]*$")])
      });
      if (this.data == 'Add') {
       this.updatebutton = false;
@@ -66,10 +66,13 @@ export class AddEmployeeComponent implements OnInit {
       this.apimicroservice.addEmployeeData(payload).subscribe(res => {
         if (res.status) {
           this.apimicroservice.openSnackbar(res.message);
-          this.dialogRef.close();
+          this.dialogRef.close({event:'reload'});
         } else {
           this.apimicroservice.openSnackbar(res.message);
         }
+      },(ERROR:HttpErrorResponse)=>{
+        console.log(ERROR);
+        this.apimicroservice.openSnackbar(ERROR.error.message);
       })
     } else {
       this.employee.get('empId').markAsTouched();
@@ -89,10 +92,13 @@ export class AddEmployeeComponent implements OnInit {
       this.apimicroservice.updateEmployee(this.id,payload).subscribe(res => {
         if (res.status) {
           this.apimicroservice.openSnackbar(res.message);
-          this.dialogRef.close();
+          this.dialogRef.close({event:'reload'});
         } else {
           this.apimicroservice.openSnackbar(res.message);
         }
+      },(ERROR:HttpErrorResponse)=>{
+        console.log(ERROR);
+        this.apimicroservice.openSnackbar(ERROR.error.message);
       })
     } else {
       this.employee.get('empId').markAsTouched();

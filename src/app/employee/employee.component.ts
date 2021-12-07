@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output, TemplateRef } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms';
 import { RestApiService } from "../rest-api.service";
 import { PopupComponent } from '../popup/popup.component';
@@ -13,7 +13,6 @@ import { Router } from "@angular/router";
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  @Output() addEmp : AddEmployeeComponent;
   events: string[] = [];
   opened: boolean;
   employees: any;
@@ -119,14 +118,14 @@ export class EmployeeComponent implements OnInit {
       }
     });
   }
-
-  receiveMessage($event) {
-    console.log("message",$event);
-    
-  }
   addEmployee() {
     const addEmployee = this.dialog.open(AddEmployeeComponent,{
       data : "Add"
+    });
+    addEmployee.afterClosed().subscribe(result => {
+      if(result.event == 'reload'){
+        this.ngOnInit();
+      }
     });
   }
 
@@ -136,7 +135,12 @@ export class EmployeeComponent implements OnInit {
         let data = res.data[0];
         const updatePopup = this.dialog.open(AddEmployeeComponent,{
           data : data,
-      })
+      });
+      updatePopup.afterClosed().subscribe(result => {
+        if(result.event == 'reload'){
+          this.ngOnInit();
+        }
+      });
     }
   })}
 

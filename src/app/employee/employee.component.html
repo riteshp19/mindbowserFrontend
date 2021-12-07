@@ -23,6 +23,7 @@
                             <table class="table table-hover mb-0 ml-2 mr-2">
                                 <thead class="thead-light">
                                     <tr>
+                                        <th>Emp Id</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Date Of Birth</th>
@@ -35,6 +36,7 @@
                                 <tbody>
                                     <tr *ngFor="let sample of employees | paginate : { id:'paginate', 
                                                             itemsPerPage: size, currentPage: page, totalItems:totalLength } ">
+                                        <td>{{sample.empId}}</td>
                                         <td>{{sample.firstName}}</td>
                                         <td>{{sample.lastName}}</td>
                                         <td>{{sample.dob | date : 'dd-MMM-yyy'}}</td>

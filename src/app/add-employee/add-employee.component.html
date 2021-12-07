@@ -6,7 +6,7 @@
                     <div class="col-md-6">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Emp Id</mat-label>
-                            <input type="text" formControlName="empId" matInput placeholder="Employee Id" />
+                            <input type="number" formControlName="empId" matInput placeholder="Employee Id" />
                             <mat-error
                               *ngIf="employee.controls['empId'].touched && employee.controls['empId'].errors?.required">
                               This field is mandatory.
@@ -21,6 +21,9 @@
                               *ngIf="employee.controls['firstName'].touched && employee.controls['firstName'].errors?.required">
                               This field is mandatory.
                             </mat-error>
+                            <mat-error *ngIf="employee.controls['firstName'].touched && employee.controls['firstName'].errors?.pattern">
+                              Enter only Alphabets.
+                            </mat-error>
                           </mat-form-field>
                     </div>
                     <div class="col-md-6">
@@ -30,6 +33,9 @@
                             <mat-error
                               *ngIf="employee.controls['lastName'].touched && employee.controls['lastName'].errors?.required">
                               This field is mandatory.
+                            </mat-error>
+                            <mat-error *ngIf="employee.controls['lastName'].touched && employee.controls['lastName'].errors?.pattern">
+                              Enter only alphabets.
                             </mat-error>
                           </mat-form-field>
                     </div>
@@ -62,6 +68,9 @@
                               *ngIf="employee.controls['mobile'].touched && employee.controls['mobile'].errors?.required">
                               This field is mandatory.
                             </mat-error>
+                            <mat-error *ngIf="employee.controls['mobile'].touched && employee.controls['mobile'].errors?.pattern">
+                              Enter Valid Mobile Number.
+                            </mat-error>
                           </mat-form-field>
                     </div>
                     <div class="col-md-6">
@@ -71,6 +80,9 @@
                             <mat-error
                               *ngIf="employee.controls['city'].touched && employee.controls['city'].errors?.required">
                               This field is mandatory.
+                            </mat-error>
+                            <mat-error *ngIf="employee.controls['city'].touched && employee.controls['city'].errors?.pattern">
+                              Enter Valid Field.
                             </mat-error>
                           </mat-form-field>
                     </div>
