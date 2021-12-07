@@ -46,12 +46,12 @@ export class AddEmployeeComponent implements OnInit {
       this.submitbutton = false;
       this.employee = this.fb.group({
         'empId': new FormControl(empdata.empId, [Validators.required]),
-        'firstName': new FormControl(empdata.firstName, [Validators.required]),
-        'lastName': new FormControl(empdata.lastName, [Validators.required]),
+        'firstName': new FormControl(empdata.firstName, [Validators.required,Validators.pattern("^[a-zA-Z ]*$")]),
+        'lastName': new FormControl(empdata.lastName, [Validators.required,Validators.pattern("^[a-zA-Z ]*$")]),
         'address': new FormControl(empdata.address, [Validators.required]),
         'dob': new FormControl(empdata.dob, [Validators.required]),
-        'mobile': new FormControl(empdata.mobile, [Validators.required,Validators.maxLength(10)]),
-        'city': new FormControl(empdata.city, [Validators.required])
+        'mobile': new FormControl(empdata.mobile, [Validators.required,Validators.pattern("(0|91)?[7-9][0-9]{9}")]),
+        'city': new FormControl(empdata.city, [Validators.required,Validators.pattern("^[a-zA-Z ]*$")])
       });
       this.id = empdata._id;
     }else{
